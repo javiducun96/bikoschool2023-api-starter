@@ -1,12 +1,4 @@
-import low from "lowdb"
-import FileSync from "lowdb/adapters/FileSync"
-import { DatabaseSchema } from "../interfaces/DatabaseSchema"
-
-function getDB() {
-  const adapter = new FileSync<DatabaseSchema>("./data/db.json")
-  const db = low(adapter)
-  return db
-}
+import { getDB } from "./dbService"
 
 class MemesService {
   public get() {
