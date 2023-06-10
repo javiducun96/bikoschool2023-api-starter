@@ -15,4 +15,9 @@ describe("Memes endpoint", function () {
     const response = await request(app).get("/api/memes").expect(200)
     expect(response.body).toBeInstanceOf(Array)
   })
+
+  it("response returns 50 memes", async () => {
+    const response = await request(app).get("/api/memes").expect(200)
+    expect(response.body.length).toBe(50)
+  })
 })
