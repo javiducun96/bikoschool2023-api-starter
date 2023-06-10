@@ -1,5 +1,5 @@
 import { createApp } from "../app"
-import { createDB } from "../services/dbService"
+import { createMemoryDB } from "../services/dbService"
 import request from "supertest"
 import { Express } from "express"
 
@@ -7,8 +7,7 @@ describe("Memes endpoint", function () {
   let app: Express
 
   beforeEach(() => {
-    const dbPath: string = process.env.DBPATH || "./data/db.json"
-    const db = createDB(dbPath)
+    const db = createMemoryDB("../fixtures/db.json")
     app = createApp(db)
   })
 
