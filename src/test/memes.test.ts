@@ -1,12 +1,17 @@
-import { response } from "express"
 import { createApp } from "../app"
 import { createDB } from "../services/dbService"
 import request from "supertest"
+import { Express } from "express"
 
 describe("Memes endpoint", function () {
-  const dbPath: string = process.env.DBPATH || "./data/db.json"
-  const db = createDB(dbPath)
-  const app = createApp(db)
+  let app: Express
+
+  beforeEach(() => {
+    const dbPath: string = process.env.DBPATH || "./data/db.json"
+    const db = createDB(dbPath)
+    app = createApp(db)
+  })
+
   it("exists", async () => await request(app).get("/api/memes").expect(200))
 
   it("return json", async () =>
