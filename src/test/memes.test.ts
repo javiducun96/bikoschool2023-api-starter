@@ -18,6 +18,6 @@ describe("Memes endpoint", function () {
 
   it("response returns 50 memes", async () => {
     const response = await request(app).get("/api/memes").expect(200)
-    expect(response.body.length).toBe(50)
+    expect(response.body).toHaveLength(50)
   })
 })
