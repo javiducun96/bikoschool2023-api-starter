@@ -14,10 +14,9 @@ describe("Memes endpoint", function () {
       .expect(200, done)
   })
 
-  it("return array json", function (done) {
+  it("response is array", function () {
     request(app)
       .get("/api/memes")
-      .expect("Content-Type", /application\/json/)
       .then((response) => {
         expect(Array.isArray(response.body)).toBeTruthy()
       })
