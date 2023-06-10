@@ -4,21 +4,27 @@ import request from "supertest"
 
 describe("Memes endpoint", function () {
   it("exists", function (done) {
-    request(app).get("/api/memes").expect(200, done)
+    request(app)
+      .get("/api/memes")
+      .expect(200)
+      .then(() => done())
   })
 
   it("return json", function (done) {
     request(app)
       .get("/api/memes")
+      .expect(200)
       .expect("Content-Type", /application\/json/)
-      .expect(200, done)
+      .then(() => done())
   })
 
-  it("response is array", function () {
+  it("response is array", function (done) {
     request(app)
       .get("/api/memes")
+      .expect(200)
       .then((response) => {
         expect(response.body).toBeInstanceOf(Array)
+        done()
       })
   })
 })
