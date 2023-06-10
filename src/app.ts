@@ -15,10 +15,4 @@ app.use(express.json())
 // http://expressjs.com/es/api.html#express.urlencoded
 app.use(express.urlencoded({ extended: false }))
 
-// Routes every path
-// http://expressjs.com/es/api.html#app.use
-app.use("/", (req: Request, res: Response) => {
-  res.json({ data: "index!" })
-})
-
 export default app
