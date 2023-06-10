@@ -16,7 +16,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 app.get("/api/memes", (req, res) => {
-  res.send("memes")
+  res.setHeader("Content-Type", "application/json")
+  res.send(JSON.stringify({ a: 1 }))
 })
 
 export default app

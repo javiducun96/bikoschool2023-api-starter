@@ -10,5 +10,6 @@ describe("GET /user", function () {
     request(app)
       .get("/api/memes")
       .expect("Content-Type", /application\/json/)
+      .expect(200, done)
   })
 })
