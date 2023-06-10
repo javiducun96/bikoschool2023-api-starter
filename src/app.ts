@@ -1,5 +1,6 @@
 import express, { Express, Request, Response } from "express"
 import morgan from "morgan"
+import memes from "./routes/memes"
 
 const app: Express = express()
 
@@ -15,9 +16,6 @@ app.use(express.json())
 // http://expressjs.com/es/api.html#express.urlencoded
 app.use(express.urlencoded({ extended: false }))
 
-app.get("/api/memes", (req, res) => {
-  res.setHeader("Content-Type", "application/json")
-  res.send(JSON.stringify({ a: 1 }))
-})
+app.use("/api/memes", memes)
 
 export default app
