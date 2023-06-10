@@ -1,17 +1,22 @@
 import express, { Express } from "express"
 import morgan from "morgan"
-import { createMemesRouter } from "./routes/memes"
 import { LowdbSync } from "lowdb"
 import { DatabaseSchema } from "./interfaces/DatabaseSchema"
+
+/* routers */
+import createMemesRouter from "./routes/memes"
 
 export function createApp(db: LowdbSync<DatabaseSchema>) {
   const app: Express = express()
   app.use(morgan("dev"))
   app.use(express.json())
   app.use(express.urlencoded({ extended: false }))
-
-  app.use("/api/memes", createMemesRouter(db))
+  createRoutes(app, db)
   return app
+}
+
+function createRoutes(app: Express, db: LowdbSync<DatabaseSchema>) {
+  app.use("/api/memes", createMemesRouter(db))
 }
 
 export default { createApp }

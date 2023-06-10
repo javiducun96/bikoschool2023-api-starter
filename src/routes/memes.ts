@@ -3,7 +3,7 @@ import MemesService from "../services/memes"
 import { LowdbSync } from "lowdb"
 import { DatabaseSchema } from "../interfaces/DatabaseSchema"
 
-export function createMemesRouter(db: LowdbSync<DatabaseSchema>) {
+function createRouter(db: LowdbSync<DatabaseSchema>) {
   const router: Router = express.Router()
   router.get("/", async (req: Request, res: Response) => {
     const memesService = new MemesService(db)
@@ -14,3 +14,5 @@ export function createMemesRouter(db: LowdbSync<DatabaseSchema>) {
   })
   return router
 }
+
+export default createRouter
