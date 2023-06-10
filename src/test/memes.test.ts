@@ -3,28 +3,16 @@ import app from "../app"
 import request from "supertest"
 
 describe("Memes endpoint", function () {
-  it("exists", function (done) {
-    request(app)
-      .get("/api/memes")
-      .expect(200)
-      .then(() => done())
-  })
+  it("exists", async () => await request(app).get("/api/memes").expect(200))
 
-  it("return json", function (done) {
-    request(app)
+  it("return json", async () =>
+    await request(app)
       .get("/api/memes")
       .expect(200)
-      .expect("Content-Type", /application\/json/)
-      .then(() => done())
-  })
+      .expect("Content-Type", /application\/json/))
 
-  it("response is array", function (done) {
-    request(app)
-      .get("/api/memes")
-      .expect(200)
-      .then((response) => {
-        expect(response.body).toBeInstanceOf(Array)
-        done()
-      })
+  it("response is array", async () => {
+    const response = await request(app).get("/api/memes").expect(200)
+    expect(response.body).toBeInstanceOf(Array)
   })
 })
