@@ -18,7 +18,7 @@ describe("Memes endpoint", function () {
     request(app)
       .get("/api/memes")
       .then((response) => {
-        expect(Array.isArray(response.body)).toBeTruthy()
+        expect(response.body).toBeInstanceOf(Array)
       })
   })
 })
