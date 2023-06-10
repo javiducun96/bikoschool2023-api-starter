@@ -15,7 +15,7 @@ app.use(express.json())
 // http://expressjs.com/es/api.html#express.urlencoded
 app.use(express.urlencoded({ extended: false }))
 
-app.get("/memes", (req, res) => {
+app.get("/api/memes", (req, res) => {
   res.send("memes")
 })
 
