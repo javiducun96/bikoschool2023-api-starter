@@ -1,11 +1,6 @@
 import low from "lowdb"
 import FileSync from "lowdb/adapters/FileSync"
-
-interface DatabaseSchema {
-  memes: Meme[]
-}
-
-interface Meme {}
+import { DatabaseSchema } from "../interfaces/DatabaseSchema"
 
 function getDB() {
   const adapter = new FileSync<DatabaseSchema>("./data/db.json")
