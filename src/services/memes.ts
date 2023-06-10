@@ -1,9 +1,11 @@
-import { getDB } from "./dbService"
+import Lowdb, { LowdbSync } from "lowdb"
+import { DatabaseSchema } from "../interfaces/DatabaseSchema"
 
 class MemesService {
+  constructor(private db: LowdbSync<DatabaseSchema>) {}
+
   public get() {
-    const db = getDB()
-    return db.get("memes").take(50).value()
+    return this.db.get("memes").take(50).value()
   }
 }
 

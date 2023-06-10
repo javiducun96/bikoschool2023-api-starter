@@ -1,10 +1,13 @@
 import http, { Server } from "http"
-import app from "./app"
+import { createApp } from "./app"
+import { createDB } from "./services/dbService"
 
 const port: string = process.env.PORT || "3000"
+const dbPath: string = process.env.DBPATH || "./data/db.json"
 
-// Assigns setting name to value
-// http://expressjs.com/es/api.html#app.set
+const db = createDB(dbPath)
+const app = createApp(db)
+
 app.set("port", port)
 
 const server: Server = http.createServer(app)

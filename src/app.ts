@@ -1,21 +1,17 @@
 import express, { Express } from "express"
 import morgan from "morgan"
-import memes from "./routes/memes"
+import { createMemesRouter } from "./routes/memes"
+import { LowdbSync } from "lowdb"
+import { DatabaseSchema } from "./interfaces/DatabaseSchema"
 
-const app: Express = express()
+export function createApp(db: LowdbSync<DatabaseSchema>) {
+  const app: Express = express()
+  app.use(morgan("dev"))
+  app.use(express.json())
+  app.use(express.urlencoded({ extended: false }))
 
-// Shows request log on terminal
-// https://github.com/expressjs/morgan
-app.use(morgan("dev"))
+  app.use("/api/memes", createMemesRouter(db))
+  return app
+}
 
-// Parses incoming requests with JSON payloads
-// http://expressjs.com/es/api.html#express.json
-app.use(express.json())
-
-// Parses incoming requests with urlencoded payloads
-// http://expressjs.com/es/api.html#express.urlencoded
-app.use(express.urlencoded({ extended: false }))
-
-app.use("/api/memes", memes)
-
-export default app
+export default { createApp }
